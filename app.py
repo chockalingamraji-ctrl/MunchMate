@@ -9,6 +9,8 @@ st.set_page_config(
 # Session State
 if "page" not in st.session_state:
     st.session_state.page = "home"
+    if "student_details_done" not in st.session_state:
+    st.session_state.student_details_done = False
 
 # HOME PAGE
 if st.session_state.page == "home":
@@ -49,11 +51,14 @@ elif st.session_state.page == "student":
 
     roll_no = st.text_input("Roll Number")
 
-    if st.button("Continue"):
+   if st.button("Continue"):
+    st.session_state.student_details_done = True
 
-        st.success(f"Welcome {name}")
+if st.session_state.student_details_done:
 
-        st.subheader("🍽️ Breakfast Menu")
+    st.success(f"Welcome {name}")
+
+    st.subheader("🍽️ Breakfast Menu")
 
         burrito_classic = st.number_input(
             "🌯 Classic Veg Burrito (₹45)",
