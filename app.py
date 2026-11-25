@@ -35,19 +35,19 @@ elif st.session_state.page == "student":
 
     st.title("🎓 Student Portal")
 
-   name = st.text_input("Student Name")
+    name = st.text_input("Student Name")
 
-class_name = st.selectbox(
-    "Class",
-    ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
-)
+    class_name = st.selectbox(
+        "Class",
+        ["6", "7", "8", "9", "10", "11", "12"]
+    )
 
-section = st.selectbox(
-    "Section",
-    ["A", "B", "C", "D"]
-)
+    section = st.selectbox(
+        "Section",
+        ["A", "B", "C", "D"]
+    )
 
-roll_no = st.text_input("Roll Number")
+    roll_no = st.text_input("Roll Number")
 
     if st.button("Continue"):
 
@@ -63,7 +63,6 @@ roll_no = st.text_input("Roll Number")
         st.write("🍰 Vanilla Cake Pop - ₹20")
         st.write("🥤 Orange Juice - ₹25")
         st.write("🥤 Watermelon Juice - ₹25")
-
 # ADMIN PAGE
 elif st.session_state.page == "admin":
 
