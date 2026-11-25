@@ -53,16 +53,80 @@ elif st.session_state.page == "student":
 
         st.success(f"Welcome {name}")
 
-        st.subheader("Breakfast Menu")
+        st.subheader("🍽️ Breakfast Menu")
 
-        st.write("🌯 Classic Veg Burrito - ₹45")
-        st.write("🌯 Paneer Burrito - ₹55")
-        st.write("🥪 Classic Veg Sandwich - ₹25")
-        st.write("🥪 Cheese Sandwich - ₹35")
-        st.write("🍰 Chocolate Cake Pop - ₹20")
-        st.write("🍰 Vanilla Cake Pop - ₹20")
-        st.write("🥤 Orange Juice - ₹25")
-        st.write("🥤 Watermelon Juice - ₹25")
+        burrito_classic = st.number_input(
+            "🌯 Classic Veg Burrito (₹45)",
+            min_value=0,
+            value=0
+        )
+
+        burrito_paneer = st.number_input(
+            "🌯 Paneer Burrito (₹55)",
+            min_value=0,
+            value=0
+        )
+
+        sandwich_classic = st.number_input(
+            "🥪 Classic Veg Sandwich (₹25)",
+            min_value=0,
+            value=0
+        )
+
+        sandwich_cheese = st.number_input(
+            "🥪 Cheese Sandwich (₹35)",
+            min_value=0,
+            value=0
+        )
+
+        cake_choco = st.number_input(
+            "🍰 Chocolate Cake Pop (₹20)",
+            min_value=0,
+            value=0
+        )
+
+        cake_vanilla = st.number_input(
+            "🍰 Vanilla Cake Pop (₹20)",
+            min_value=0,
+            value=0
+        )
+
+        juice_orange = st.number_input(
+            "🥤 Orange Juice (₹25)",
+            min_value=0,
+            value=0
+        )
+
+        juice_watermelon = st.number_input(
+            "🥤 Watermelon Juice (₹25)",
+            min_value=0,
+            value=0
+        )
+
+        total = (
+            burrito_classic * 45 +
+            burrito_paneer * 55 +
+            sandwich_classic * 25 +
+            sandwich_cheese * 35 +
+            cake_choco * 20 +
+            cake_vanilla * 20 +
+            juice_orange * 25 +
+            juice_watermelon * 25
+        )
+
+        st.markdown("---")
+        st.subheader(f"💰 Total Amount: ₹{total}")
+
+        payment = st.radio(
+            "Choose Payment Method",
+            ["GPay", "Cash"]
+        )
+
+        if st.button("✅ Place Order"):
+            st.success("Order Placed Successfully!")
+            st.write(f"Payment Method: {payment}")
+            st.write(f"Total Amount: ₹{total}")
+
 # ADMIN PAGE
 elif st.session_state.page == "admin":
 
@@ -81,7 +145,13 @@ elif st.session_state.page == "admin":
     if st.button("Login"):
 
         if password == "MunchMate2027" and secret == "MMADMIN":
-            st.success("Access Granted")
+
+            st.success("✅ Access Granted")
+
+            st.subheader("Admin Dashboard")
+
+            st.metric("Today's Orders", "0")
+            st.metric("Revenue", "₹0")
 
         else:
-            st.error("Invalid Credentials")
+            st.error("❌ Invalid Credentials")
