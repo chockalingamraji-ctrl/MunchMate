@@ -180,6 +180,29 @@ elif st.session_state.page == "admin":
 
             st.metric("Today's Orders", "0")
             st.metric("Revenue", "₹0")
+        st.markdown("---")
+
+st.subheader("Cash Payment Verification")
+
+student_name = st.text_input(
+    "Student Name (Cash Payment)"
+)
+
+amount_due = st.number_input(
+    "Amount Received",
+    min_value=0
+)
+
+if st.button("Mark As Paid"):
+
+    st.success(
+        f"Payment received from {student_name}"
+    )
+
+    st.success(
+        f"₹{amount_due} marked as PAID"
+    )
+
 
         else:
             st.error("❌ Invalid Credentials")
