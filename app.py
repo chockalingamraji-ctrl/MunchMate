@@ -13,6 +13,9 @@ if "page" not in st.session_state:
 if "student_details_done" not in st.session_state:
     st.session_state.student_details_done = False
 
+if "admin_logged_in" not in st.session_state:
+    st.session_state.admin_logged_in = False
+
 
 # HOME PAGE
 if st.session_state.page == "home":
@@ -37,6 +40,10 @@ if st.session_state.page == "home":
 
 # STUDENT PAGE
 elif st.session_state.page == "student":
+
+    if st.button("← Back to Home"):
+        st.session_state.page = "home"
+        st.rerun()
 
     st.title("🎓 Student Portal")
 
@@ -125,7 +132,7 @@ elif st.session_state.page == "student":
         st.markdown("---")
         st.subheader(f"💰 Total Amount: ₹{total}")
 
-             payment = st.radio(
+        payment = st.radio(
             "Choose Payment Method",
             ["GPay", "Cash"]
         )
@@ -133,77 +140,74 @@ elif st.session_state.page == "student":
         if st.button("✅ Place Order"):
 
             st.success("✅ Order Placed Successfully!")
-
             st.write(f"Total Amount: ₹{total}")
-
             st.write(f"Payment Method: {payment}")
 
             if payment == "GPay":
-
                 st.success("✅ Payment Completed")
-
                 st.write("Status: PAID")
-
                 st.write(f"Amount Received: ₹{total}")
-
             else:
-
                 st.warning("⏳ Payment Pending")
-
                 st.write(
                     "Student can bring cash tomorrow or parent may pay at the counter."
                 )
-
                 st.write("Status: PAYMENT PENDING")
-
                 st.write(f"Amount Due: ₹{total}")
+
+
 # ADMIN PAGE
 elif st.session_state.page == "admin":
 
-    st.title("🔒 Admin Login")
+    if st.button("← Back to Home"):
+        st.session_state.page = "home"
+        st.rerun()
 
-    password = st.text_input(
-        "Enter Passcode",
-        type="password"
-    )
+    st.title("🔒 Admin Portal")
 
-    secret = st.text_input(
-        "Enter Secret Code",
-        type="password"
-    )
+    if not st.session_state.admin_logged_in:
 
-    if st.button("Login"):
+        password = st.text_input(
+            "Enter Passcode",
+            type="password"
+        )
 
-        if password == "MunchMate2027" and secret == "MMADMIN":
+        secret = st.text_input(
+            "Enter Secret Code",
+            type="password"
+        )
 
-            st.success("✅ Access Granted")
-            st.subheader("Admin Dashboard")
+        if st.button("Login"):
+            if password == "MunchMate2027" and secret == "MMADMIN":
+                st.session_state.admin_logged_in = True
+                st.rerun()
+            else:
+                st.error("❌ Invalid Credentials")
 
-            st.metric("Today's Orders", "0")
-            st.metric("Revenue", "₹0")
+    else:
+
+        if st.button("Logout"):
+            st.session_state.admin_logged_in = False
+            st.rerun()
+
+        st.success("✅ Access Granted")
+        st.subheader("Admin Dashboard")
+
+        st.metric("Today's Orders", "0")
+        st.metric("Revenue", "₹0")
+
         st.markdown("---")
+        st.subheader("Cash Payment Verification")
 
-st.subheader("Cash Payment Verification")
+        student_name = st.text_input(
+            "Student Name (Cash Payment)"
+        )
 
-student_name = st.text_input(
-    "Student Name (Cash Payment)"
-)
+        amount_due = st.number_input(
+            "Amount Received",
+            min_value=0
+        )
 
-amount_due = st.number_input(
-    "Amount Received",
-    min_value=0
-)
-
-if st.button("Mark As Paid"):
-
-    st.success(
-        f"Payment received from {student_name}"
-    )
-
-    st.success(
-        f"₹{amount_due} marked as PAID"
-    )
-
-
-        else:
-            st.error("❌ Invalid Credentials")
+        if st.button("Mark As Paid"):
+            st.success(f"Payment received from {student_name}")
+            st.success(f"₹{amount_due} marked as PAID")
