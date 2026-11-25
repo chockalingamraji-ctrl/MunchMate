@@ -12,8 +12,7 @@ if "page" not in st.session_state:
 
 if "student_details_done" not in st.session_state:
     st.session_state.student_details_done = False
-    if "student_details_done" not in st.session_state:
-    st.session_state.student_details_done = False
+
 
 # HOME PAGE
 if st.session_state.page == "home":
@@ -35,6 +34,7 @@ if st.session_state.page == "home":
             st.session_state.page = "admin"
             st.rerun()
 
+
 # STUDENT PAGE
 elif st.session_state.page == "student":
 
@@ -54,14 +54,14 @@ elif st.session_state.page == "student":
 
     roll_no = st.text_input("Roll Number")
 
-   if st.button("Continue"):
-    st.session_state.student_details_done = True
+    if st.button("Continue"):
+        st.session_state.student_details_done = True
 
-if st.session_state.student_details_done:
+    if st.session_state.student_details_done:
 
-    st.success(f"Welcome {name}")
+        st.success(f"Welcome {name}")
 
-    st.subheader("🍽️ Breakfast Menu")
+        st.subheader("🍽️ Breakfast Menu")
 
         burrito_classic = st.number_input(
             "🌯 Classic Veg Burrito (₹45)",
@@ -135,6 +135,7 @@ if st.session_state.student_details_done:
             st.write(f"Payment Method: {payment}")
             st.write(f"Total Amount: ₹{total}")
 
+
 # ADMIN PAGE
 elif st.session_state.page == "admin":
 
@@ -155,7 +156,6 @@ elif st.session_state.page == "admin":
         if password == "MunchMate2027" and secret == "MMADMIN":
 
             st.success("✅ Access Granted")
-
             st.subheader("Admin Dashboard")
 
             st.metric("Today's Orders", "0")
