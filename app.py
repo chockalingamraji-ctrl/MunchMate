@@ -130,10 +130,30 @@ elif st.session_state.page == "student":
             ["GPay", "Cash"]
         )
 
-        if st.button("✅ Place Order"):
-            st.success("Order Placed Successfully!")
-            st.write(f"Payment Method: {payment}")
-            st.write(f"Total Amount: ₹{total}")
+       if st.button("✅ Place Order"):
+
+    st.success("✅ Order Placed Successfully!")
+
+    st.write(f"Total Amount: ₹{total}")
+    st.write(f"Payment Method: {payment}")
+
+    if payment == "GPay":
+
+        st.success("✅ Payment Completed")
+
+        st.write("Status: PAID")
+        st.write(f"Amount Received: ₹{total}")
+
+    else:
+
+        st.warning("⏳ Payment Pending")
+
+        st.write(
+            "Student can bring cash tomorrow or parent may pay at the counter."
+        )
+
+        st.write("Status: PAYMENT PENDING")
+        st.write(f"Amount Due: ₹{total}")
 
 
 # ADMIN PAGE
