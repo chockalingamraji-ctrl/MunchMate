@@ -266,16 +266,25 @@ elif st.session_state.page == "admin":
             "Enter Secret Code",
             type="password"
         )
+if not st.session_state.admin_logged_in:
 
-               if st.button("Login"):
-            admin_pass = st.secrets["admin"]["passcode"]
-            admin_secret = st.secrets["admin"]["secret_code"]
+    st.subheader("Admin Login")
 
-            if password == admin_pass and secret == admin_secret:
-                st.session_state.admin_logged_in = True
-                st.rerun()
-            else:
-                st.error("❌ Invalid Credentials")
+    password = st.text_input("Admin Password", type="password")
+    secret = st.text_input("Secret Code", type="password")
+
+    if st.button("Login"):
+        admin_pass = st.secrets["admin"]["passcode"]
+        admin_secret = st.secrets["admin"]["secret_code"]
+
+        if password == admin_pass and secret == admin_secret:
+            st.session_state.admin_logged_in = True
+            st.rerun()
+        else:
+            st.error("❌ Invalid Credentials")
+
+else:
+    st.success("Welcome, Admin!")
     else:
 
         if st.button("Logout"):
