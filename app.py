@@ -9,6 +9,9 @@ st.set_page_config(
 # Session State
 if "page" not in st.session_state:
     st.session_state.page = "home"
+
+if "student_details_done" not in st.session_state:
+    st.session_state.student_details_done = False
     if "student_details_done" not in st.session_state:
     st.session_state.student_details_done = False
 
