@@ -125,37 +125,38 @@ elif st.session_state.page == "student":
         st.markdown("---")
         st.subheader(f"💰 Total Amount: ₹{total}")
 
-        payment = st.radio(
+             payment = st.radio(
             "Choose Payment Method",
             ["GPay", "Cash"]
         )
 
-       if st.button("✅ Place Order"):
+        if st.button("✅ Place Order"):
 
-    st.success("✅ Order Placed Successfully!")
+            st.success("✅ Order Placed Successfully!")
 
-    st.write(f"Total Amount: ₹{total}")
-    st.write(f"Payment Method: {payment}")
+            st.write(f"Total Amount: ₹{total}")
 
-    if payment == "GPay":
+            st.write(f"Payment Method: {payment}")
 
-        st.success("✅ Payment Completed")
+            if payment == "GPay":
 
-        st.write("Status: PAID")
-        st.write(f"Amount Received: ₹{total}")
+                st.success("✅ Payment Completed")
 
-    else:
+                st.write("Status: PAID")
 
-        st.warning("⏳ Payment Pending")
+                st.write(f"Amount Received: ₹{total}")
 
-        st.write(
-            "Student can bring cash tomorrow or parent may pay at the counter."
-        )
+            else:
 
-        st.write("Status: PAYMENT PENDING")
-        st.write(f"Amount Due: ₹{total}")
+                st.warning("⏳ Payment Pending")
 
+                st.write(
+                    "Student can bring cash tomorrow or parent may pay at the counter."
+                )
 
+                st.write("Status: PAYMENT PENDING")
+
+                st.write(f"Amount Due: ₹{total}")
 # ADMIN PAGE
 elif st.session_state.page == "admin":
 
