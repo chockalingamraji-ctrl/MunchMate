@@ -268,7 +268,11 @@ elif st.session_state.page == "admin":
         )
 
         if st.button("Login"):
-            if password == "MunchMate2027" and secret == "MMADMIN":
+        if st.button("Login"):
+            admin_pass = st.secrets.get("admin", {}).get("passcode", "MunchMate2027")
+            admin_secret = st.secrets.get("admin", {}).get("secret_code", "MMADMIN")
+
+            if password == admin_pass and secret == admin_secret:
                 st.session_state.admin_logged_in = True
                 st.rerun()
             else:
